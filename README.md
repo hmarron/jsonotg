@@ -43,7 +43,7 @@ if err != nil {
 Fields can be indexed by chaining `GetField`, followed by an `AsType`
 ```
 boolVal, ok := j.
-    GetField("level2").
+	GetField("level2").
 	GetField("key3").
 	AsBool()
 
@@ -53,7 +53,11 @@ fmt.Println(boolVal, ok)
 
 Slices work as follows:
 ```
-arrVal, ok := j.GetField("level2").GetField("nestedArray").AsArray()
+arrVal, ok := j.
+	GetField("level2").
+	GetField("nestedArray").
+	AsArray()
+
 fmt.Println(arrVal, ok)
 
 // Get a string from the array
@@ -61,7 +65,8 @@ stringVal, ok = arrVal[1].AsString()
 fmt.Println(stringVal, ok)
 ```
 
-Structs work like this:
+Getting a struct from the array 
+(useful if you want to get on deeply nested struct out of a json object, but don't want to define structs for all the levels above it that we don't care about)
 ```
 type someStruct struct {
 	SomeField string `json:"someField"`
